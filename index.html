@@ -440,10 +440,37 @@ function refreshMenu(){
   document.getElementById('menuHistDesc').textContent=played>0?`${wins} resueltas`:'Aún no has jugado';
   const todayDone=history[todayKey];
   const btn=document.getElementById('menuHeroBtn');
+  const hero=document.getElementById('menuHero');
   if(todayDone){
-    btn.className='menu-hero-btn menu-hero-btn-done';
-    btn.textContent=todayDone.win?`Resuelto · ${todayDone.stars}`:'Ver resultado';
+    hero.style.cursor='default';
+    hero.onclick=null;
+    if(todayDone.win){
+      hero.style.background='#1a3d1a';
+      btn.className='menu-hero-btn menu-hero-btn-done';
+      btn.innerHTML=`<span style="font-size:16px;letter-spacing:3px;">${todayDone.stars}</span>`;
+    } else {
+      hero.style.background='#3d1a1a';
+      btn.className='menu-hero-btn menu-hero-btn-done';
+      btn.innerHTML=`Culpable: <strong>${P.culprit}</strong>`;
+    }
+    // explanation
+    const existing=document.getElementById('menuHeroExpl');
+    if(!existing){
+      const expl=document.createElement('div');
+      expl.id='menuHeroExpl';
+      expl.style.cssText='font-size:11px;color:rgba(255,255,255,0.5);line-height:1.55;margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.1);';
+      expl.textContent=P.explanation;
+      const next=document.createElement('div');
+      next.style.cssText='font-size:10px;color:rgba(255,255,255,0.3);margin-top:8px;letter-spacing:0.3px;';
+      const tom=new Date(today); tom.setDate(tom.getDate()+1);
+      next.textContent='Próximo caso · '+tom.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'});
+      hero.appendChild(expl);
+      hero.appendChild(next);
+    }
   } else {
+    hero.style.background='#1a1a2e';
+    hero.style.cursor='pointer';
+    hero.onclick=()=>goTo('sGame');
     btn.className='menu-hero-btn';
     btn.textContent='Investigar →';
   }
