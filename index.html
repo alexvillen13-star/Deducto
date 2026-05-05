@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
@@ -14,46 +15,102 @@ body{font-family:system-ui,sans-serif;background:#eeeee8;display:flex;justify-co
 .screen{display:none;flex-direction:column;flex:1;min-height:0;}
 .screen.active{display:flex;}
 
+/* ── OVERLAY ── */
+.overlay{position:absolute;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;border-radius:36px;opacity:0;pointer-events:none;transition:opacity 0.25s ease;}
+.overlay.show{opacity:1;pointer-events:all;}
+.overlay-bg{position:absolute;inset:0;border-radius:36px;background:rgba(26,26,46,0.5);backdrop-filter:blur(6px);}
+.overlay-card{position:relative;width:100%;border-radius:24px;padding:24px;animation:resultSlide 0.3s ease forwards;}
+.overlay-card-win{background:#fafaf8;}
+.overlay-card-lose{background:#fafaf8;}
+.overlay-close{position:absolute;top:14px;right:14px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(26,26,46,0.12);background:#f0efe8;cursor:pointer;font-size:14px;color:#4a4a6a;display:flex;align-items:center;justify-content:center;}
+.overlay-close:hover{background:#e4e3dc;}
+.overlay-icon{font-size:32px;margin-bottom:10px;text-align:center;}
+.overlay-title{font-size:18px;font-weight:500;margin-bottom:8px;text-align:center;}
+.overlay-title-win{color:#1a5c1a;}
+.overlay-title-lose{color:#791F1F;}
+.overlay-body{font-size:13px;line-height:1.65;margin-bottom:16px;text-align:center;}
+.overlay-body-win{color:#27500A;}
+.overlay-body-lose{color:#8b1a1a;}
+.overlay-why{background:#fdecea;border:1px solid #e8b0b0;border-radius:12px;padding:11px 13px;font-size:12px;color:#8b1a1a;line-height:1.6;margin-bottom:16px;text-align:left;}
+.overlay-why-title{font-size:10px;font-weight:500;letter-spacing:0.3px;margin-bottom:3px;text-transform:uppercase;}
+.overlay-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:14px;}
+.overlay-stat{border-radius:10px;padding:8px 6px;text-align:center;background:#edf7ed;}
+.overlay-stat-n{font-size:17px;font-weight:500;color:#276327;margin-bottom:1px;}
+.overlay-stat-l{font-size:10px;color:#276327;opacity:.7;}
+.overlay-stars{font-size:24px;letter-spacing:6px;text-align:center;margin-bottom:14px;}
+.overlay-btns{display:flex;flex-direction:column;gap:8px;}
+.overlay-btn-share{width:100%;padding:11px;border-radius:12px;border:1px solid rgba(26,26,46,0.2);background:#fff;font-size:13px;font-weight:500;cursor:pointer;color:#1a1a2e;}
+.overlay-btn-share:hover{background:#f0efe8;}
+.overlay-btn-menu{width:100%;padding:11px;border-radius:12px;border:none;background:#2c3e7a;color:#fff;font-size:13px;font-weight:500;cursor:pointer;}
+.overlay-btn-menu:hover{background:#1a2a5e;}
+.overlay-btn-close{width:100%;padding:11px;border-radius:12px;border:none;background:#2c3e7a;color:#fff;font-size:13px;font-weight:500;cursor:pointer;}
+.overlay-btn-close:hover{background:#1a2a5e;}
+
 /* ── SPLASH ── */
-.splash{align-items:center;justify-content:center;gap:0;padding:40px 32px;}
-.splash-logo{font-size:42px;font-weight:500;color:#1a1a2e;letter-spacing:-1px;margin-bottom:6px;}
+.splash{background:#1a1a2e;align-items:center;justify-content:center;cursor:pointer;}
+.splash-center{display:flex;flex-direction:column;align-items:center;gap:10px;flex:1;justify-content:center;}
+.splash-logo{font-size:52px;font-weight:500;color:#fff;letter-spacing:-1.5px;}
 .splash-logo span{color:#c0392b;}
-.splash-sub{font-size:13px;color:#9090b0;margin-bottom:64px;letter-spacing:0.2px;}
-.splash-btn{width:100%;padding:15px;border-radius:16px;border:none;background:#2c3e7a;color:#fff;font-size:16px;font-weight:500;cursor:pointer;margin-bottom:12px;letter-spacing:0.1px;}
-.splash-btn:hover{background:#1a2a5e;}
-.splash-deco{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#EEEDFE 0%,#fdecea 50%,#fdf3dc 100%);display:flex;align-items:center;justify-content:center;font-size:72px;margin-bottom:48px;border:1px solid rgba(26,26,46,0.07);}
-.splash-version{font-size:10px;color:#c0bfb8;margin-top:16px;}
+.splash-sub{font-size:13px;color:#9090c0;letter-spacing:0.3px;}
+.splash-tap{position:absolute;bottom:48px;font-size:11px;color:#7070a0;letter-spacing:0.5px;animation:pulse 2s ease-in-out infinite;}
 
 /* ── MENU ── */
-.menu-screen{padding:0;}
 .menu-topbar{padding:16px 20px 20px;border-bottom:1px solid rgba(26,26,46,0.1);}
 .menu-logo{font-size:22px;font-weight:500;color:#1a1a2e;letter-spacing:-0.5px;}
 .menu-logo span{color:#c0392b;}
 .menu-date{font-size:12px;color:#9090b0;margin-top:3px;}
-.menu-body{flex:1;padding:24px 20px;display:flex;flex-direction:column;gap:14px;}
-.menu-card{border-radius:20px;border:1px solid rgba(26,26,46,0.1);padding:20px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:16px;}
-.menu-card:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,26,46,0.08);}
-.menu-card-daily{background:#2c3e7a;}
-.menu-card-history{background:#fafaf8;}
-.menu-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
-.menu-icon-daily{background:rgba(255,255,255,0.15);}
-.menu-icon-history{background:#f0efe8;}
-.menu-card-info{flex:1;}
-.menu-card-title{font-size:16px;font-weight:500;margin-bottom:3px;}
-.menu-card-title-daily{color:#fff;}
-.menu-card-title-history{color:#1a1a2e;}
-.menu-card-desc{font-size:12px;}
-.menu-card-desc-daily{color:rgba(255,255,255,0.65);}
-.menu-card-desc-history{color:#9090b0;}
-.menu-card-arrow{font-size:18px;opacity:0.4;}
-.menu-card-arrow-daily{color:#fff;}
-.menu-card-arrow-history{color:#1a1a2e;}
-.menu-streak-bar{background:#fdf3dc;border:1px solid #e8d080;border-radius:16px;padding:14px 18px;display:flex;align-items:center;gap:12px;}
-.menu-streak-icon{font-size:20px;}
-.menu-streak-text{flex:1;}
-.menu-streak-title{font-size:13px;font-weight:500;color:#7a5c00;}
-.menu-streak-sub{font-size:11px;color:#b8860b;margin-top:1px;}
-.menu-footer{padding:0 20px 24px;font-size:10px;color:#c0bfb8;text-align:center;}
+.menu-body{flex:1;padding:20px;display:flex;flex-direction:column;gap:12px;}
+.menu-hero{border-radius:24px;background:#1a1a2e;padding:24px;cursor:pointer;transition:all 0.18s;position:relative;overflow:hidden;}
+.menu-hero:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(26,26,46,0.18);}
+.menu-hero-deco{position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,rgba(192,57,43,0.25) 0%,transparent 70%);}
+.menu-hero-tag{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:12px;}
+.menu-hero-title{font-size:20px;font-weight:500;color:#fff;line-height:1.3;margin-bottom:8px;}
+.menu-hero-meta{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.menu-hero-setting{font-size:11px;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:20px;}
+.menu-hero-btn{display:inline-flex;align-items:center;gap:6px;background:#c0392b;color:#fff;font-size:13px;font-weight:500;padding:10px 18px;border-radius:12px;}
+.menu-hero-btn-done{background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);}
+.menu-bottom-row{display:flex;gap:10px;}
+.menu-small-card{flex:1;border-radius:18px;padding:16px 14px;cursor:pointer;transition:all 0.18s;position:relative;overflow:hidden;}
+.menu-small-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(26,26,46,0.1);}
+.menu-small-card-hist{background:#2c3e7a;}
+.menu-small-card-settings{background:#f0efe8;border:1px solid rgba(26,26,46,0.08);}
+.menu-small-deco{position:absolute;right:-12px;bottom:-12px;width:60px;height:60px;border-radius:50%;}
+.menu-small-deco-hist{background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);}
+.menu-small-deco-settings{background:radial-gradient(circle,rgba(26,26,46,0.05) 0%,transparent 70%);}
+.menu-small-tag{font-size:9px;letter-spacing:0.6px;text-transform:uppercase;margin-bottom:10px;font-weight:500;}
+.menu-small-tag-hist{color:rgba(255,255,255,0.4);}
+.menu-small-tag-settings{color:#9090b0;}
+.menu-small-title{font-size:15px;font-weight:500;margin-bottom:3px;}
+.menu-small-title-hist{color:#fff;}
+.menu-small-title-settings{color:#1a1a2e;}
+.menu-small-sub{font-size:10px;}
+.menu-small-sub-hist{color:rgba(255,255,255,0.45);}
+.menu-small-sub-settings{color:#9090b0;}
+.menu-streak-bar{border-radius:18px;padding:16px;transition:all 0.3s;}
+.menu-streak-bar.s0{background:#f0efe8;border:1px solid rgba(26,26,46,0.08);}
+.menu-streak-bar.s1{background:#fdf3dc;border:1px solid #e8d080;}
+.menu-streak-bar.s2{background:#fdecea;border:1px solid #e8b0b0;}
+.menu-streak-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.menu-streak-title{font-size:13px;font-weight:500;}
+.menu-streak-bar.s0 .menu-streak-title{color:#4a4a6a;}
+.menu-streak-bar.s1 .menu-streak-title{color:#7a5c00;}
+.menu-streak-bar.s2 .menu-streak-title{color:#791F1F;}
+.menu-streak-count{font-size:20px;font-weight:500;}
+.menu-streak-bar.s0 .menu-streak-count{color:#1a1a2e;}
+.menu-streak-bar.s1 .menu-streak-count{color:#b8860b;}
+.menu-streak-bar.s2 .menu-streak-count{color:#c0392b;}
+.menu-streak-dots{display:flex;gap:6px;margin-bottom:10px;}
+.streak-dot{flex:1;height:6px;border-radius:999px;}
+.streak-dot.win{background:#27500A;}
+.streak-dot.lose{background:#c0392b;}
+.streak-dot.empty{background:rgba(26,26,46,0.1);}
+.streak-dot.today-win{background:#27500A;box-shadow:0 0 0 2px rgba(39,80,10,0.2);}
+.streak-dot.today-empty{background:rgba(26,26,46,0.15);box-shadow:0 0 0 2px rgba(26,26,46,0.1);}
+.menu-streak-sub{font-size:11px;}
+.menu-streak-bar.s0 .menu-streak-sub{color:#9090b0;}
+.menu-streak-bar.s1 .menu-streak-sub{color:#b8860b;}
+.menu-streak-bar.s2 .menu-streak-sub{color:#c0392b;}
+.menu-footer{padding:0 20px 20px;font-size:10px;color:#c0bfb8;text-align:center;}
 
 /* ── HISTORY ── */
 .hist-topbar{padding:6px 20px 13px;border-bottom:1px solid rgba(26,26,46,0.1);flex-shrink:0;display:flex;align-items:center;gap:12px;}
@@ -69,23 +126,23 @@ body{font-family:system-ui,sans-serif;background:#eeeee8;display:flex;justify-co
 .cal-nav-btn:hover{background:#e4e3dc;}
 .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:24px;}
 .cal-dow{font-size:9px;color:#9090b0;text-align:center;padding:4px 0;text-transform:uppercase;letter-spacing:0.3px;}
-.cal-day{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:#4a4a6a;position:relative;cursor:default;}
-.cal-day.empty{background:transparent;}
+.cal-day{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:#4a4a6a;}
 .cal-day.today{background:#eeeee8;font-weight:500;color:#1a1a2e;}
 .cal-day.played{background:#fff;border:1px solid rgba(26,26,46,0.1);}
 .cal-day.played.win{background:#edf7ed;border-color:#b8ddb8;}
 .cal-day.played.lose{background:#fdecea;border-color:#e8b0b0;}
 .cal-day-num{font-size:11px;line-height:1;}
-.cal-day-stars{font-size:8px;line-height:1;margin-top:2px;letter-spacing:0px;}
+.cal-day-stars{font-size:8px;line-height:1;margin-top:2px;}
 .hist-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:20px;}
 .hist-stat{background:#fff;border:1px solid rgba(26,26,46,0.1);border-radius:14px;padding:12px 8px;text-align:center;}
 .hist-stat-n{font-size:22px;font-weight:500;color:#1a1a2e;margin-bottom:2px;}
 .hist-stat-l{font-size:10px;color:#9090b0;}
 .hist-empty{text-align:center;padding:40px 0;font-size:13px;color:#9090b0;line-height:1.7;}
 
-/* ── GAME (existing styles) ── */
+/* ── GAME ── */
 .topbar{padding:6px 20px 13px;border-bottom:1px solid rgba(26,26,46,0.1);flex-shrink:0;}
-.top-row{display:flex;justify-content:space-between;align-items:flex-start;}
+.top-row{display:flex;justify-content:space-between;align-items:center;}
+.top-left{display:flex;align-items:center;gap:10px;}
 .logo{font-size:20px;font-weight:500;color:#1a1a2e;letter-spacing:-0.5px;}
 .logo span{color:#c0392b;}
 .top-meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
@@ -94,24 +151,24 @@ body{font-family:system-ui,sans-serif;background:#eeeee8;display:flex;justify-co
 .de{background:#edf7ed;color:#276327;border:1px solid #b8ddb8;}
 .dm{background:#fdf3dc;color:#7a5c00;border:1px solid #e8d080;}
 .dh{background:#fdecea;color:#791F1F;border:1px solid #e8b0b0;}
-.top-date{font-size:11px;color:#9090b0;margin-top:2px;}
+.top-date{font-size:11px;color:#9090b0;}
 .case-section{padding:11px 20px 10px;flex-shrink:0;border-bottom:1px solid rgba(26,26,46,0.1);}
 .case-tag{font-size:10px;color:#9090b0;letter-spacing:0.5px;text-transform:uppercase;margin-bottom:4px;}
 .case-title{font-size:15px;font-weight:500;color:#1a1a2e;margin-bottom:4px;line-height:1.4;}
 .case-desc{font-size:12px;color:#4a4a6a;line-height:1.5;}
-.suspects-section{padding:12px 0 10px;flex-shrink:0;border-bottom:1px solid rgba(26,26,46,0.1);}
-.s-label{font-size:10px;color:#9090b0;letter-spacing:0.5px;text-transform:uppercase;padding:0 20px;margin-bottom:10px;}
-.suspects-row{display:flex;gap:10px;overflow-x:auto;padding:0 20px 2px;scrollbar-width:none;}
+.suspects-section{padding:10px 0 8px;flex-shrink:0;border-bottom:1px solid rgba(26,26,46,0.1);}
+.s-label{font-size:10px;color:#9090b0;letter-spacing:0.5px;text-transform:uppercase;padding:0 20px;margin-bottom:8px;}
+.suspects-row{display:flex;gap:10px;padding:4px 20px 4px;overflow-x:auto;scrollbar-width:none;}
 .suspects-row::-webkit-scrollbar{display:none;}
 .sbubble{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;flex-shrink:0;width:66px;}
-.avatar{width:58px;height:58px;border-radius:50%;border:2.5px solid transparent;transition:all 0.18s;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;position:relative;user-select:none;}
+.avatar{width:58px;height:58px;border-radius:50%;border:2.5px solid transparent;transition:border-color 0.18s,transform 0.18s;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:500;position:relative;user-select:none;}
 .avatar.sel{border-color:#2c3e7a;transform:scale(1.08);}
 .avatar.inno-mark{border-color:#27500A;}
 .avatar.susp-mark{border-color:#b8860b;}
 .avatar.failed-mark{border-color:#c0392b;}
 .avatar.culprit-mark{border-color:#27500A;transform:scale(1.08);}
 .sname{font-size:10px;color:#4a4a6a;text-align:center;}
-.mark-dot{position:absolute;bottom:0;right:0;width:16px;height:16px;border-radius:50%;border:2px solid #fafaf8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;}
+.mark-dot{position:absolute;bottom:0;right:0;width:16px;height:16px;border-radius:50%;border:2px solid #fafaf8;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#fff;animation:popIn 0.25s cubic-bezier(.34,1.56,.64,1);}
 .decl-panel{flex:1;display:flex;flex-direction:column;min-height:0;}
 .decl-scroll{flex:1;overflow-y:auto;padding:14px 20px 10px;scrollbar-width:none;}
 .decl-scroll::-webkit-scrollbar{display:none;}
@@ -120,98 +177,127 @@ body{font-family:system-ui,sans-serif;background:#eeeee8;display:flex;justify-co
 .decl-header{display:flex;align-items:center;gap:11px;margin-bottom:12px;}
 .decl-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;}
 .decl-name{font-size:14px;font-weight:500;color:#1a1a2e;}
-.decl-role{font-size:11px;color:#9090b0;margin-top:1px;}
+.decl-context{font-size:11px;color:#9090b0;margin-top:2px;line-height:1.4;font-style:normal;}
 .speech{background:#fff;border:1px solid rgba(26,26,46,0.14);border-radius:14px;padding:13px 15px;font-size:13px;color:#4a4a6a;line-height:1.65;font-style:italic;position:relative;margin-bottom:10px;}
-.speech::before{content:'';position:absolute;top:-7px;left:20px;width:13px;height:13px;background:#fff;border-left:1px solid rgba(26,26,46,0.14);border-top:1px solid rgba(26,26,46,0.14);transform:rotate(45deg);}
+.speech::before{content:’’;position:absolute;top:-7px;left:20px;width:13px;height:13px;background:#fff;border-left:1px solid rgba(26,26,46,0.14);border-top:1px solid rgba(26,26,46,0.14);transform:rotate(45deg);}
 .badge{font-size:10px;padding:2px 8px;border-radius:999px;margin-top:3px;display:inline-block;font-weight:500;}
 .badge-inno{background:#edf7ed;color:#276327;}
 .badge-susp{background:#fdf3dc;color:#7a5c00;}
 .badge-fail{background:#fdecea;color:#8b1a1a;}
-.why-box{background:#fdecea;border:1px solid #e8b0b0;border-radius:12px;padding:11px 13px;font-size:12px;color:#8b1a1a;line-height:1.6;margin-bottom:10px;}
-.why-title{font-size:10px;font-weight:500;letter-spacing:0.3px;margin-bottom:3px;text-transform:uppercase;}
-.hint-box{background:#fdf3dc;border:1px solid #e8d080;border-radius:12px;padding:10px 13px;font-size:12px;color:#7a5c00;line-height:1.55;margin-bottom:8px;}
+/* hints area */
+.hints-area{padding:8px 20px 0;flex-shrink:0;}
+.hint-box{background:#fdf3dc;border:1px solid #e8d080;border-radius:12px;padding:10px 13px;font-size:12px;color:#7a5c00;line-height:1.55;margin-bottom:6px;}
 .hint-n{font-size:10px;font-weight:500;letter-spacing:0.3px;margin-bottom:2px;text-transform:uppercase;}
-.result-win{background:#edf7ed;border:1px solid #b8ddb8;border-radius:14px;padding:14px 15px;margin-bottom:10px;}
-.result-lose{background:#fdecea;border:1px solid #e8b0b0;border-radius:14px;padding:14px 15px;margin-bottom:10px;}
-.result-title{font-size:15px;font-weight:500;margin-bottom:6px;}
-.result-body{font-size:12px;line-height:1.65;margin-bottom:12px;}
-.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px;}
-.stat{border-radius:10px;padding:8px 6px;text-align:center;background:rgba(255,255,255,0.65);}
-.stat-n{font-size:17px;font-weight:500;margin-bottom:1px;}
-.stat-l{font-size:10px;opacity:.7;}
-.share-btn{width:100%;padding:9px;border-radius:10px;border:1px solid rgba(26,26,46,0.2);background:rgba(255,255,255,0.7);font-size:13px;font-weight:500;cursor:pointer;color:#1a1a2e;}
-.share-btn:hover{background:#fff;}
 .bottom-bar{padding:10px 20px 18px;border-top:1px solid rgba(26,26,46,0.1);flex-shrink:0;background:#fafaf8;}
 .mark-row{display:flex;gap:7px;margin-bottom:8px;}
-.btn-inno{flex:1;font-size:12px;padding:9px 6px;border-radius:12px;cursor:pointer;font-weight:500;background:#edf7ed;color:#276327;border:1px solid #b8ddb8;}
+.btn-inno{flex:1;font-size:12px;padding:9px 6px;border-radius:12px;cursor:pointer;font-weight:500;background:#edf7ed;color:#276327;border:1px solid #b8ddb8;transition:transform 0.1s;}
+.btn-inno:active{transform:scale(0.95);}
 .btn-inno:hover{background:#d4edda;}
 .btn-inno:disabled{opacity:0.4;cursor:default;}
-.btn-susp{flex:1;font-size:12px;padding:9px 6px;border-radius:12px;cursor:pointer;font-weight:500;background:#fdf3dc;color:#7a5c00;border:1px solid #e8d080;}
+.btn-susp{flex:1;font-size:12px;padding:9px 6px;border-radius:12px;cursor:pointer;font-weight:500;background:#fdf3dc;color:#7a5c00;border:1px solid #e8d080;transition:transform 0.1s;}
+.btn-susp:active{transform:scale(0.95);}
 .btn-susp:hover{background:#fbe8a0;}
 .btn-susp:disabled{opacity:0.4;cursor:default;}
-.btn-clear{flex:1;font-size:12px;padding:9px 6px;border-radius:12px;cursor:pointer;font-weight:500;background:#f0efe8;color:#4a4a6a;border:1px solid rgba(26,26,46,0.15);}
+.btn-clear{flex:1;font-size:12px;padding:9px 6px;border-radius:12px;cursor:pointer;font-weight:500;background:#f0efe8;color:#4a4a6a;border:1px solid rgba(26,26,46,0.15);transition:transform 0.1s;}
+.btn-clear:active{transform:scale(0.95);}
 .btn-clear:hover{background:#e4e3dc;}
 .btn-clear:disabled{opacity:0.4;cursor:default;}
-.btn-accuse{width:100%;padding:11px;border-radius:12px;border:none;background:#2c3e7a;color:#fff;font-size:14px;font-weight:500;cursor:pointer;margin-bottom:9px;letter-spacing:0.1px;}
+.btn-accuse{width:100%;padding:11px;border-radius:12px;border:none;background:#2c3e7a;color:#fff;font-size:14px;font-weight:500;cursor:pointer;margin-bottom:9px;letter-spacing:0.1px;transition:transform 0.1s;}
+.btn-accuse:active{transform:scale(0.97);}
 .btn-accuse:hover{background:#1a2a5e;}
 .btn-accuse:disabled{opacity:0.35;cursor:default;}
 .hint-row{display:flex;align-items:center;justify-content:space-between;}
 .hint-left{font-size:11px;color:#9090b0;}
-.btn-hint{font-size:12px;padding:5px 14px;border-radius:10px;border:1px solid rgba(26,26,46,0.18);background:#f0efe8;cursor:pointer;color:#4a4a6a;font-weight:500;}
+.btn-hint{font-size:12px;padding:5px 14px;border-radius:10px;border:1px solid rgba(26,26,46,0.18);background:#f0efe8;cursor:pointer;color:#4a4a6a;font-weight:500;transition:transform 0.1s;}
+.btn-hint:active{transform:scale(0.95);}
 .btn-hint:hover{background:#e4e3dc;}
 .btn-hint:disabled{opacity:0.35;cursor:default;}
+
+/* ── ANIMATIONS ── */
+@keyframes pulse{0%,100%{opacity:0.4;}50%{opacity:1;}}
+@keyframes popIn{0%{transform:scale(0);opacity:0;}60%{transform:scale(1.2);}100%{transform:scale(1);opacity:1;}}
+@keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-5px);}40%{transform:translateX(5px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
+@keyframes slideUp{0%{transform:translateY(14px);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+@keyframes resultSlide{0%{transform:translateY(20px);opacity:0;}100%{transform:translateY(0);opacity:1;}}
+@keyframes starPop{0%{transform:scale(0) rotate(-20deg);opacity:0;}60%{transform:scale(1.3) rotate(5deg);}100%{transform:scale(1) rotate(0deg);opacity:1;}}
+@keyframes ripple{0%{transform:scale(1);opacity:0.5;}100%{transform:scale(2.4);opacity:0;}}
+.anim-slideup{animation:slideUp 0.22s ease forwards;}
+.anim-shake{animation:shake 0.4s ease forwards;}
+.ripple-wrap{overflow:visible;}
+.ripple-ring{position:absolute;inset:0;border-radius:50%;border:2.5px solid #27500A;animation:ripple 0.65s ease-out forwards;pointer-events:none;}
 </style>
+
 </head>
 <body>
-<div class="phone">
+<div class="phone" id="phone">
   <div class="statusbar"><span id="clk">9:41</span><span>●●●</span></div>
 
-  <!-- SPLASH -->
-  <div class="screen active" id="sSplash">
-    <div class="splash screen active" id="sSplashInner" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 32px;">
-      <div class="splash-deco">🔍</div>
-      <div class="splash-logo">De<span>duc</span>to</div>
-      <div class="splash-sub">El caso del día te espera</div>
-      <button class="splash-btn" onclick="goTo('sMenu')">Empezar</button>
-      <div class="splash-version">v1.0 · Casos de enero</div>
+  <!-- OVERLAY -->
+
+  <div class="overlay" id="overlay">
+    <div class="overlay-bg" onclick="closeOverlay()"></div>
+    <div class="overlay-card" id="overlayCard">
+      <button class="overlay-close" onclick="closeOverlay()">✕</button>
+      <div id="overlayContent"></div>
     </div>
   </div>
 
+  <!-- SPLASH -->
+
+  <div class="screen active splash" id="sSplash" onclick="splashOut()">
+    <div class="splash-center">
+      <div class="splash-logo">De<span>duc</span>to</div>
+      <div class="splash-sub">El caso del día</div>
+    </div>
+    <div class="splash-tap">Toca para continuar</div>
+  </div>
+
   <!-- MENU -->
+
   <div class="screen" id="sMenu">
     <div class="menu-topbar">
       <div class="menu-logo">De<span>duc</span>to</div>
       <div class="menu-date" id="menuDate"></div>
     </div>
     <div class="menu-body">
-      <div class="menu-card menu-card-daily" onclick="goTo('sGame')">
-        <div class="menu-icon menu-icon-daily">🕵️</div>
-        <div class="menu-card-info">
-          <div class="menu-card-title menu-card-title-daily">Caso del día</div>
-          <div class="menu-card-desc menu-card-desc-daily" id="menuDailyDesc">Carga el caso de hoy</div>
+      <div class="menu-hero" id="menuHero" onclick="goTo('sGame')">
+        <div class="menu-hero-deco"></div>
+        <div class="menu-hero-tag">Caso del día</div>
+        <div class="menu-hero-title" id="menuHeroTitle"></div>
+        <div class="menu-hero-meta">
+          <span class="diff-pill menu-hero-diff" id="menuHeroDiff"></span>
         </div>
-        <div class="menu-card-arrow menu-card-arrow-daily">›</div>
+        <div class="menu-hero-setting" id="menuHeroSetting"></div>
+        <div id="menuHeroBtn" class="menu-hero-btn">Investigar →</div>
       </div>
-      <div class="menu-card menu-card-history" onclick="goTo('sHistory')">
-        <div class="menu-icon menu-icon-history">📅</div>
-        <div class="menu-card-info">
-          <div class="menu-card-title menu-card-title-history">Historial</div>
-          <div class="menu-card-desc menu-card-desc-history" id="menuHistDesc">Tus partidas anteriores</div>
+      <div class="menu-bottom-row">
+        <div class="menu-small-card menu-small-card-hist" onclick="goTo('sHistory')">
+          <div class="menu-small-deco menu-small-deco-hist"></div>
+          <div class="menu-small-tag menu-small-tag-hist">Historial</div>
+          <div class="menu-small-title menu-small-title-hist" id="menuHistTitle">0 partidas</div>
+          <div class="menu-small-sub menu-small-sub-hist" id="menuHistDesc">Tus casos resueltos</div>
         </div>
-        <div class="menu-card-arrow menu-card-arrow-history">›</div>
+        <div class="menu-small-card menu-small-card-settings">
+          <div class="menu-small-deco menu-small-deco-settings"></div>
+          <div class="menu-small-tag menu-small-tag-settings">Ajustes</div>
+          <div class="menu-small-title menu-small-title-settings">Opciones</div>
+          <div class="menu-small-sub menu-small-sub-settings">Próximamente</div>
+        </div>
       </div>
-      <div class="menu-streak-bar">
-        <div class="menu-streak-icon">🔥</div>
-        <div class="menu-streak-text">
-          <div class="menu-streak-title" id="streakTitle">Racha actual: 0 días</div>
-          <div class="menu-streak-sub" id="streakSub">Resuelve el caso de hoy para continuar</div>
+      <div class="menu-streak-bar" id="streakBar">
+        <div class="menu-streak-top">
+          <div class="menu-streak-title">Racha actual</div>
+          <div class="menu-streak-count" id="streakCount">0</div>
         </div>
+        <div class="menu-streak-dots" id="streakDots"></div>
+        <div class="menu-streak-sub" id="streakSub"></div>
       </div>
     </div>
     <div class="menu-footer">Nuevo caso cada día · Generado con IA</div>
   </div>
 
   <!-- HISTORY -->
+
   <div class="screen" id="sHistory">
     <div class="hist-topbar">
       <button class="back-btn" onclick="goTo('sMenu')">‹</button>
@@ -236,18 +322,19 @@ body{font-family:system-ui,sans-serif;background:#eeeee8;display:flex;justify-co
   </div>
 
   <!-- GAME -->
+
   <div class="screen" id="sGame">
     <div class="topbar">
       <div class="top-row">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <button class="back-btn" onclick="goTo('sMenu')" style="flex-shrink:0;">‹</button>
+        <div class="top-left">
+          <button class="back-btn" onclick="goTo('sMenu')">‹</button>
           <div>
             <div class="logo">De<span>duc</span>to</div>
             <div class="top-date" id="dateLabel"></div>
           </div>
         </div>
         <div class="top-meta">
-          <span class="streak" id="streakBadge">&#9670; 0 días</span>
+          <span class="streak" id="streakBadge">◆ 0 días</span>
           <span class="diff-pill" id="diffLabel"></span>
         </div>
       </div>
@@ -261,6 +348,7 @@ body{font-family:system-ui,sans-serif;background:#eeeee8;display:flex;justify-co
       <div class="s-label">Sospechosos</div>
       <div class="suspects-row" id="suspRow"></div>
     </div>
+    <div class="hints-area" id="hintsArea"></div>
     <div class="decl-panel">
       <div class="decl-scroll" id="declScroll">
         <div class="decl-empty"><div class="decl-empty-txt">Toca un sospechoso<br>para ver su declaración</div></div>
@@ -282,43 +370,29 @@ body{font-family:system-ui,sans-serif;background:#eeeee8;display:flex;justify-co
 </div>
 
 <script>
-// ── DATA ──
 const AV=[{bg:'#EEEDFE',fg:'#3C3489'},{bg:'#E1F5EE',fg:'#085041'},{bg:'#FAEEDA',fg:'#633806'},{bg:'#FBEAF0',fg:'#72243E'},{bg:'#E6F1FB',fg:'#0C447C'}];
 const PUZZLES=[
-  {day:1,diff:"Fácil",dc:"de",crime:"El robo del collar de perlas",setting:"Durante una cena en la mansión Alcántara, el collar de perlas desapareció. Solo había tres invitados.",culprit:"Ricardo Vega",hints:["Alguien estuvo solo en el comedor cuando ocurrió el robo.","El ladrón actuó entre las 21:00 y las 21:30."],suspects:[{name:"Elena Morales",role:"Pianista",clue:"Estuve tocando el piano en el salón toda la noche. El mayordomo puede confirmarlo."},{name:"Ricardo Vega",role:"Anticuario",clue:"Salí al jardín a las 21:00 y no volví hasta las 22:00. Estuve completamente solo."},{name:"Sofía Ríos",role:"Periodista",clue:"Estaba en el baño del primer piso. Cuando bajé, la señora Alcántara ya gritaba."}],wrongReasons:{"Elena Morales":"El mayordomo la vio en el salón toda la noche. Coartada sólida.","Sofía Ríos":"Bajó después de que empezaran los gritos. No tuvo oportunidad."},explanation:"Ricardo dijo estar solo en el jardín de 21:00 a 22:00 — exactamente la ventana del robo — sin ningún testigo."},
-  {day:2,diff:"Medio",dc:"dm",crime:"La ficha robada",setting:"Durante una sesión de rol en el piso de Marcos, la ficha original manuscrita del personaje legendario 'Kael el Sombrío' desapareció del archivador. Llevaba tres años guardada como reliquia del grupo. Solo los cuatro jugadores estuvieron en el piso esa tarde.",culprit:"Nerea Vidal",hints:["Alguien entró al dormitorio durante la sesión — hay una marca fresca en la moqueta cerca del archivador.","Alguien abrió el archivador durante la sesión — la goma que lo cerraba estaba en el suelo, no encima como siempre."],suspects:[{name:"Marcos Ibarra",role:"Dungeon Master",clue:"Estuve detrás del biombo toda la sesión preparando el encuentro final. Nunca me levanté, los tres pueden confirmarlo."},{name:"Nerea Vidal",role:"Jugadora",clue:"Fui al baño una vez, pero el archivador está en el dormitorio y yo ni entré. Siempre me pareció una exageración guardarla así."},{name:"Tomás Reig",role:"Jugador",clue:"Llegué el último, cuando ya estaban todos sentados. Dejé la mochila en la entrada y no la moví."},{name:"Clara Fonts",role:"Jugadora",clue:"Estuve todo el rato en la mesa. En el descanso fui a la cocina a por agua, que está en dirección contraria al dormitorio."}],wrongReasons:{"Marcos Ibarra":"Estuvo visible detrás del biombo toda la sesión con tres testigos.","Tomás Reig":"Llegó el último y no se movió de la mesa según todos coinciden.","Clara Fonts":"La cocina está en dirección opuesta al dormitorio donde estaba el archivador."},explanation:"Nerea fue la única que se alejó de la mesa sin testigos y con acceso directo al dormitorio. Su comentario de que 'siempre le pareció una exageración guardarla' revela que conocía bien dónde estaba y le restaba importancia, lo que delata interés previo."},
-  {day:3,diff:"Medio",dc:"dm",crime:"El veneno en la copa",setting:"En el club literario El Fénix, el presidente cayó envenenado tras el brindis. Cuatro miembros estuvieron en la sala.",culprit:"Patricia Soler",hints:["Solo quien sirvió las copas pudo añadir el veneno sin ser visto.","El veneno requería disolverse minutos antes del brindis."],suspects:[{name:"Diego Herrera",role:"Secretario",clue:"Abrí las botellas y las puse en la mesa. Luego fui al almacén a buscar el micrófono."},{name:"Patricia Soler",role:"Tesorera",clue:"Me quedé poniendo las copas mientras Diego buscaba el micrófono. Todo normal."},{name:"Luis Parejo",role:"Vocal",clue:"Llegué tarde, cuando ya estaban las copas servidas. No toqué nada."},{name:"Ana Blasco",role:"Socia fundadora",clue:"Estuve en la puerta recibiendo invitados hasta que empezó el acto."}],wrongReasons:{"Diego Herrera":"Se marchó al almacén antes de que las copas estuvieran servidas.","Luis Parejo":"Llegó tarde con las copas ya servidas.","Ana Blasco":"Estaba en la puerta con testigos durante todo el tiempo."},explanation:"Patricia fue la única que estuvo sola con las copas ya servidas. Solo ella tuvo acceso y oportunidad."},
-  {day:4,diff:"Medio",dc:"dm",crime:"El cuadro desaparecido",setting:"Durante la inauguración de la galería Verona, un Miró fue sustituido por una copia perfecta. Cuatro personas tenían acceso al almacén.",culprit:"Bruno Esteve",hints:["La sustitución ocurrió entre las 18:30 y las 19:00.","La copia fue encargada tres semanas antes según el taller."],suspects:[{name:"Clara Vidal",role:"Directora",clue:"Llegué a las 19:15 directamente desde el aeropuerto. Vuelo verificable."},{name:"Bruno Esteve",role:"Montaje",clue:"Terminé de colgar el cuadro a las 18:00 y me fui con el electricista hasta las 19:30."},{name:"Nuria Camps",role:"Restauradora",clue:"Autentiqué el Miró a las 17:00. Luego fui a supervisar la iluminación."},{name:"Tomás Ibáñez",role:"Vigilante",clue:"Cerré el almacén con mi llave a las 17:45 y no lo abrí más."}],wrongReasons:{"Clara Vidal":"Llegó a las 19:15 con vuelo verificable. La sustitución fue antes.","Nuria Camps":"Autenticó el original a las 17:00 y se fue a otra sala.","Tomás Ibáñez":"Cerró el almacén a las 17:45, pero Bruno tenía llave propia como encargado."},explanation:"Bruno encargó la copia tres semanas antes. Tenía llave propia y su coartada con el electricista es un cómplice preparado."},
-  {day:5,diff:"Difícil",dc:"dh",crime:"El sabotaje en el laboratorio",setting:"En BioTech Valencia, datos de un ensayo clínico fueron borrados. Cinco empleados tenían acceso al servidor.",culprit:"Raúl Montoya",hints:["El borrado se realizó desde un terminal interno entre las 23:10 y las 23:40.","Alguien accedió al edificio con tarjeta a las 23:05."],suspects:[{name:"Laura Gimeno",role:"Investigadora",clue:"Esa noche cené en casa de mis padres en Alicante. Llegué a las 20:00 y no salí."},{name:"Raúl Montoya",role:"Técnico sistemas",clue:"Estaba en mi apartamento viendo una serie. No salí en toda la noche."},{name:"Pilar Sanz",role:"Dir. científica",clue:"Trabajé en remoto hasta las 22:00. Mi VPN lo confirma. Luego me dormí."},{name:"Javier Leal",role:"Becario",clue:"No tengo credenciales de administrador, solo acceso básico de lectura."},{name:"Marta Ferrán",role:"Analista",clue:"Estaba de guardia en el hospital universitario. El jefe puede confirmarlo."}],wrongReasons:{"Laura Gimeno":"Estaba en Alicante — dos horas del laboratorio.","Pilar Sanz":"VPN registra conexión hasta las 22:00. El acceso fue a las 23:05.","Javier Leal":"Sin credenciales de administrador no puede borrar datos.","Marta Ferrán":"Guardia en hospital con testigos. Imposible estar en dos sitios."},explanation:"Alguien entró físicamente a las 23:05. Solo Raúl tiene acceso total y su coartada es 'ver una serie' sin ningún registro ni testigo."},
-  {day:6,diff:"Difícil",dc:"dh",crime:"La trampa en la subasta",setting:"En la casa de subastas Orión, monedas romanas fueron sustituidas antes de la puja. Cinco personas accedieron al almacén.",culprit:"Gonzalo Prieto",hints:["Las monedas falsas tienen aleación moderna detectable.","El lote fue manipulado entre el peritaje (11:00) y el cierre (16:00)."],suspects:[{name:"Helena Ruiz",role:"Subastadora",clue:"Solo entro al almacén en el peritaje y al sacar lotes. El sello siempre intacto."},{name:"Gonzalo Prieto",role:"Asistente almacén",clue:"Solo moví la caja del estante C al B para hacer sitio. No la abrí."},{name:"Federico Oms",role:"Perito",clue:"Autentiqué las monedas a las 11:00. No volví al almacén después."},{name:"Silvia Mora",role:"Compradora",clue:"Vi el lote a las 13:00 con el sello intacto. No lo toqué."},{name:"Andrés Souto",role:"Transportista",clue:"Entregué el lote a las 9:00 y me fui. Tengo entregas firmadas."}],wrongReasons:{"Helena Ruiz":"Solo tocó lotes sellados con testigos en ambas visitas.","Federico Oms":"No volvió al almacén tras el peritaje.","Silvia Mora":"Vio el sello intacto a las 13:00. La sustitución fue después.","Andrés Souto":"Tiene registros externos de entregas todo el día."},explanation:"Gonzalo estuvo en el almacén sin supervisión entre las 13:00 y las 16:00. El único con acceso continuo y oportunidad real."},
-  {day:7,diff:"Muy difícil",dc:"dh",crime:"El acceso a la cámara acorazada",setting:"En el Banco Mediterráneo, alguien accedió a la cámara en domingo usando dos códigos robados. Cinco personas conocían alguno.",culprit:"Roberto Cano",hints:["El acceso requirió los dos códigos completos y correctos.","Las cámaras muestran a alguien entrando a las 8:47 con capucha."],suspects:[{name:"Ignacio Ferrer",role:"Director",clue:"Tengo el código A pero nunca di el B a nadie. Ese domingo estaba en una boda en Málaga."},{name:"Cristina Albor",role:"Jefa operaciones",clue:"Solo conozco el código B. Sin el A es imposible entrar. Ese día fui al gimnasio."},{name:"Roberto Cano",role:"Auditor",clue:"Vi ambos códigos en el informe del viernes. Los destruí después, como es protocolo."},{name:"Vera Linde",role:"Empleada caja",clue:"Solo tengo acceso a caja. Nunca me dieron códigos de la cámara."},{name:"Omar Khalil",role:"Técnico seguridad",clue:"Mantengo los sistemas pero los códigos son del director y operaciones, no míos."}],wrongReasons:{"Ignacio Ferrer":"Coartada en Málaga verificable. Sin el código B no puede entrar solo.","Cristina Albor":"Solo tiene el código B. Sin el A el acceso es imposible.","Vera Linde":"No tiene ningún código de cámara.","Omar Khalil":"No tiene los códigos de acceso."},explanation:"Roberto es el único que vio ambos códigos el viernes. Dice haberlos destruido pero es inverificable. Nunca mencionó dónde estaba el domingo."}
+  {day:1,diff:"Fácil",dc:"de",crime:"La botella envenenada",setting:"En una bodega familiar en La Rioja, el patriarca cae enfermo tras probar una botella reservada para la cena de aniversario. Tres familiares estuvieron en la bodega esa tarde.",culprit:"Carmen Solís",hints:["La botella manipulada era la del aniversario, guardada en un hueco que solo la familia de toda la vida conocía.","La sustancia usada requería conocimiento de las dosis exactas para no ser letal."],suspects:[{name:"Carmen Solís",role:"Hija mayor",context:"Lleva años esperando heredar el negocio pero su padre anunció esta semana que lo vendería a un grupo inversor.",clue:"Bajé a buscar una botella del 2018 para la cena. Estuve dos minutos y subí."},{name:"Raúl Solís",role:"Hijo menor",context:"Estudió enología pero lo dejó para trabajar fuera. Volvió hace un mes sin dar muchas explicaciones.",clue:"Ni bajé a la bodega. Estuve todo el día arreglando la furgoneta en el garaje."},{name:"Elena Solís",role:"Nuera",context:"Se casó con Raúl hace dos años. Antes de la boda trabajó en un laboratorio farmacéutico durante tres años.",clue:"Estuve en la cocina preparando la cena. No toqué nada de la bodega."}],wrongReasons:{"Raúl Solís":"No bajó a la bodega — el garaje tiene cámara que lo confirma.","Elena Solís":"Tiene conocimiento técnico pero no sabía dónde estaba guardada la botella del aniversario."},explanation:"Carmen fue la única que bajó a la bodega, conocía el escenario de toda la vida y sabía exactamente dónde estaba la botella especial. Tenía motivo directo tras enterarse de la venta del negocio."},
+  {day:2,diff:"Fácil",dc:"de",crime:"El trofeo roto",setting:"En el vestuario del Club Deportivo Minerva, el trofeo regional de 1987 apareció hecho pedazos un lunes por la mañana. Solo tres personas tienen llave del vestuario y estuvieron el domingo por la tarde.",culprit:"Jordi Mas",hints:["El trofeo fue golpeado con fuerza desde arriba, no caído — los fragmentos están dispersos hacia afuera.","Alguien estuvo en el vestuario después de las 19:00 — la luz estaba encendida cuando el edificio fue cerrado a las 20:00."],suspects:[{name:"Jordi Mas",role:"Entrenador",context:"Lleva 15 años en el club. Esta semana se enteró de que la directiva no le renovará el contrato.",clue:"Estuve en mi despacho revisando vídeos hasta las 19:00. Luego me fui."},{name:"Santi Puig",role:"Utilero",context:"Trabajó en tres clubes distintos en cinco años, siempre con algún conflicto al irse. Llegó al Minerva hace cuatro meses.",clue:"Entré a recoger los petos sucios sobre las 18:00 y salí en diez minutos."},{name:"Marta Llopis",role:"Delegada",context:"Fue ella quien propuso no renovar a Jordi. Fuera del club son vecinos y tienen una disputa por una reforma desde hace meses.",clue:"Fui a dejar unos documentos en el despacho de Jordi. No entré al vestuario."}],wrongReasons:{"Santi Puig":"La cámara de la entrada registra su salida a las 18:10.","Marta Llopis":"No entró al vestuario — el conserje la vio solo en el pasillo de despachos."},explanation:"Jordi dijo irse a las 19:00 pero la luz del vestuario seguía encendida a las 20:00. Tenía llave, motivo claro tras la no renovación, y fue el último en el edificio."},
+  {day:3,diff:"Medio",dc:"dm",crime:"El contrato filtrado",setting:"En el despacho de arquitectura Planta Baja, el contrato de un gran cliente apareció publicado en un foro de la competencia antes de firmarse. Cuatro personas tuvieron acceso al documento.",culprit:"David Noms",hints:["La filtración incluyó detalles del anexo que solo estaban en la versión impresa, no en el digital.","El foro donde apareció el contrato es conocido por ser usado habitualmente por el grupo rival para obtener información."],suspects:[{name:"Inés Carbó",role:"Socia fundadora",context:"Lleva 12 años construyendo el despacho. Hace tres meses rechazó una oferta de compra de un grupo rival.",clue:"El contrato estaba en mi ordenador pero no lo abrí ese día. Estuve en visita de obra toda la tarde."},{name:"Víctor Saura",role:"Arquitecto senior",context:"Fue el candidato descartado cuando Inés eligió socia a otra persona el año pasado. Desde entonces tiene entrevistas en otras empresas.",clue:"Lo revisé por la mañana para preparar la reunión. Luego no volví a tocarlo."},{name:"Paula Ferri",role:"Socia junior",context:"Se incorporó hace un año tras una etapa en el grupo rival que intentó comprar el despacho.",clue:"Tuve acceso al contrato pero lo cerré sin modificar. Tengo el registro de actividad."},{name:"David Noms",role:"Becario",context:"Es sobrino de uno de los directivos del grupo rival. Nunca lo ha mencionado en el despacho.",clue:"Yo solo imprimí el contrato para la reunión. No me quedé con ninguna copia."}],wrongReasons:{"Inés Carbó":"No estuvo en el despacho esa tarde — visita de obra verificable.","Víctor Saura":"Tiene registro de cierre de sesión a las 13:00, antes de la filtración.","Paula Ferri":"Su log de actividad digital está limpio y la filtración vino del impreso."},explanation:"David imprimió el contrato y tuvo la versión física en sus manos. La filtración incluía datos solo presentes en el impreso. Su vínculo familiar con el grupo rival, nunca declarado, es el nexo que lo delata."},
+  {day:4,diff:"Medio",dc:"dm",crime:"La caja del restaurante",setting:"En el restaurante Sal Gruesa, la caja fuerte del almacén apareció forzada un martes por la noche. Cuatro empleados tenían llave del local.",culprit:"Miquel Roca",hints:["La caja fue forzada con una herramienta de cocina profesional, no con palanca.","La alarma fue desactivada y reactivada a las 00:15, después de que todos dijeran haberse ido."],suspects:[{name:"Berta Cano",role:"Jefa de sala",context:"Lleva 6 años en el restaurante. La semana pasada pidió un adelanto de sueldo que el dueño le denegó.",clue:"Me fui a las 23:30 cuando cerré la caja registradora. El repartidor me vio salir."},{name:"Miquel Roca",role:"Cocinero",context:"Tiene deudas conocidas entre los compañeros. Hace dos semanas pidió hacer horas extra pero le dijeron que no había presupuesto.",clue:"Salí por la puerta de cocina a las 23:00. Siempre hago lo mismo."},{name:"Laia Vidal",role:"Camarera",context:"Estudiante de último año que trabaja los fines de semana. El martes no tenía turno pero vino a recoger un pedido personal.",clue:"Entré un momento a buscar mi chaqueta que había olvidado. El dueño me dio permiso por mensaje."},{name:"Omar Slimani",role:"Ayudante de cocina",context:"Lleva tres meses en el restaurante. Antes trabajó en un local que cerró por irregularidades en caja.",clue:"Salí con Miquel a las 23:00. Nos fuimos juntos al metro."}],wrongReasons:{"Berta Cano":"Tiene testigo de salida a las 23:30 y no tiene llave de la caja fuerte del almacén.","Laia Vidal":"Tenía permiso del dueño para entrar pero no tiene llave del local ni de la caja fuerte.","Omar Slimani":"Salió con Miquel pero no tiene llave del local — no podía volver a entrar solo."},explanation:"Miquel tiene llave del local, conocimiento de herramientas de cocina y deudas conocidas. La alarma fue reactivada a las 00:15, hora a la que él era el único que podía volver a entrar. Omar salió con él pero sin llave propia."},
+  {day:5,diff:"Difícil",dc:"dh",crime:"El manuscrito desaparecido",setting:"En la editorial Página Uno, el manuscrito inédito de un autor consagrado fue fotografiado ilegalmente la noche antes de enviarse a imprenta. Cinco personas tenían acceso a la sala de originales.",culprit:"Noa Ferrer",hints:["El manuscrito fue fotografiado, no robado — las páginas aparecieron desordenadas pero presentes al día siguiente.","Alguien usó la cafetera de la sala contigua a las 19:15, después de que todos dijeran haberse ido."],suspects:[{name:"Rosa Alted",role:"Editora jefa",context:"Lleva 20 años en la editorial. El autor amenazó con cambiar de editorial si el libro no salía antes de fin de año.",clue:"El manuscrito estaba en mi mesa a las 18:00. Me fui sin cerrarlo con llave porque pensé que nadie más entraría."},{name:"Fran Mir",role:"Editor junior",context:"Fue rechazado para el puesto de editor jefe hace seis meses. Desde entonces tiene entrevistas en editoriales de la competencia.",clue:"Recogí mis cosas a las 18:30 y me fui. No entré a la sala de originales."},{name:"Celia Tous",role:"Correctora",context:"Trabajó con el manuscrito durante tres semanas. Tiene un blog literario donde adelanta novedades antes de su anuncio oficial.",clue:"Terminé mi corrección y devolví el original a Rosa a las 17:00. No volví."},{name:"Álex Durán",role:"Agente del autor",context:"Representa también a tres autores de la competencia directa del autor de este manuscrito.",clue:"Salí después de la reunión con Rosa, sobre las 18:15. No entré a ninguna otra sala."},{name:"Noa Ferrer",role:"Becaria",context:"Empezó hace dos semanas. Antes de esta beca estuvo seis meses en la editorial rival con más interés en fichar al autor.",clue:"Estuve archivando en la sala de al lado hasta las 19:30. No entré a la sala de originales."}],wrongReasons:{"Rosa Alted":"Se fue a las 18:00 dejando la sala abierta por descuido, pero no tiene motivo para filtrar su propio manuscrito.","Fran Mir":"No entró a la sala de originales — su tarjeta de acceso no registra entrada.","Celia Tous":"Devolvió el original a las 17:00 y no volvió al edificio según el registro de entrada.","Álex Durán":"Salió a las 18:15 sin acceso registrado a otras salas."},explanation:"Noa estaba en la sala contigua hasta las 19:30 con la sala de originales abierta y sin nadie más en el edificio. Su paso previo por la editorial rival y el manuscrito desordenado — señal de fotografiado rápido — la señalan directamente."},
+  {day:6,diff:"Difícil",dc:"dh",crime:"El fallo en el rally",setting:"Durante los ensayos del Rally Costa Blanca, el coche del favorito sufrió un fallo de frenos que casi acaba en tragedia. El vehículo había sido revisado esa mañana. Cinco personas tuvieron acceso al garaje.",culprit:"Iván Llop",hints:["El fallo fue en el software de asistencia de frenos, no en la mecánica — la revisión física era correcta.","El sistema fue modificado entre las 11:00 y las 12:00, cuando el coche ya estaba cerrado para la sesión."],suspects:[{name:"Toni Gadea",role:"Mecánico jefe",context:"Lleva 10 años con el equipo. Esta temporada el piloto le ha culpado públicamente de dos abandonos anteriores.",clue:"Hice la revisión de frenos a las 8:00 y todo estaba correcto. Firmé el parte."},{name:"Sara Blat",role:"Mecánica",context:"La más joven del equipo. Fue fichada directamente por el patrocinador, saltándose al mecánico jefe, lo que generó tensión interna.",clue:"Estuve revisando el motor toda la mañana. No toqué el sistema de frenos."},{name:"Héctor Pons",role:"Piloto rival",context:"Su equipo quedaría primero si el favorito abandona. Consiguió un pase de prensa para estar en el paddock ese día.",clue:"Estuve en el paddock pero nunca entré al garaje del equipo. Hay cámaras en la entrada."},{name:"Marcos Valero",role:"Representante del patrocinador",context:"Tiene reuniones pendientes con el equipo rival para una posible colaboración la próxima temporada.",clue:"Visité el garaje a las 10:00 para ver la preparación. Estuve con Toni todo el tiempo."},{name:"Iván Llop",role:"Ingeniero de datos",context:"Accede remotamente a los sistemas del coche pero también estuvo físicamente en el garaje esa mañana. Su contrato vence si el equipo no queda entre los tres primeros.",clue:"Estuve conectado al sistema toda la mañana. Entré al garaje a las 11:00 a calibrar sensores."}],wrongReasons:{"Toni Gadea":"Revisó correctamente la mecánica — el fallo fue en software, fuera de su área.","Sara Blat":"No tocó el sistema de frenos y no tiene acceso al software del coche.","Héctor Pons":"No entró al garaje — las cámaras de entrada lo confirman.","Marcos Valero":"Estuvo con Toni durante su visita y no tiene acceso técnico al sistema."},explanation:"Iván tiene acceso físico y remoto al sistema. Entró al garaje exactamente en la franja del fallo y su contrato dependía del resultado del equipo. El fallo en software solo podía venir de alguien con credenciales técnicas del coche."},
+  {day:7,diff:"Muy difícil",dc:"dh",crime:"La herencia impugnada",setting:"El notario Aurelio Camps recibió una denuncia: el testamento del empresario Félix Molina, firmado tres días antes de su muerte, podría ser falso. Cinco personas estuvieron con él en sus últimas semanas.",culprit:"Gerard Puig",hints:["El testamento fue redactado en un procesador de texto diferente al que usaba habitualmente el notario de Félix.","La firma del testamento coincide en fecha con el único día que la enfermera se ausentó por una urgencia familiar."],suspects:[{name:"Diana Molina",role:"Hija",context:"Lleva años distanciada de su padre tras una disputa por la gestión de la empresa. El testamento anterior la dejaba como única heredera.",clue:"Vi a mi padre dos semanas antes de que muriera. Estábamos intentando reconciliarnos."},{name:"Gerard Puig",role:"Asistente personal",context:"Trabajó con Félix durante 8 años con acceso total a sus documentos y agenda. El nuevo testamento le incluye con una herencia significativa que el anterior no contemplaba.",clue:"Yo gestioné todos sus documentos hasta el final. Siempre seguí sus instrucciones al pie de la letra."},{name:"Neus Sala",role:"Médica de cabecera",context:"Atestiguó que Félix estaba en plenas facultades mentales tres días antes de su muerte, lo que da validez legal al testamento.",clue:"El señor Molina estaba lúcido cuando le visité. Firmé el certificado porque era lo correcto."},{name:"Andreu Valls",role:"Socio empresarial",context:"El nuevo testamento le transfiere el control de la empresa, algo que llevaba años intentando negociar sin éxito.",clue:"Félix quería que la empresa siguiera adelante. Yo solo respeto su voluntad."},{name:"Lola Mir",role:"Enfermera",context:"Cuidó a Félix las últimas dos semanas y estaba con él casi todo el día. Declaró que en esos días Félix apenas reconocía a las personas.",clue:"No entiendo cómo pudo firmar nada con claridad. Yo estaba con él casi todo el día."}],wrongReasons:{"Diana Molina":"Tenía motivo para impugnar el testamento, no para falsificarlo — el anterior la beneficiaba.","Neus Sala":"Firmó de buena fe basándose en una visita puntual, sin conocer el estado real continuo de Félix.","Andreu Valls":"Se beneficia del nuevo testamento pero no tenía acceso a los documentos de Félix.","Lola Mir":"Es quien levanta la sospecha sobre el estado de Félix, no quien se beneficia del testamento."},explanation:"Gerard tenía acceso total a los documentos y agenda de Félix, conocía sus hábitos notariales y se beneficia directamente del nuevo testamento. Aprovechó el único día sin Lola para actuar, y el procesador de texto diferente apunta a su ordenador, no al del notario habitual."}
 ];
 
 // ── STATE ──
-const today=new Date(), dow=today.getDay(), adj=dow===0?7:dow, P=PUZZLES[adj-1];
+const today=new Date(),dow=today.getDay(),adj=dow===0?7:dow,P=PUZZLES[adj-1];
 const dayNames=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 const monthNames=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-let sel=null, marks={}, failed=new Set(), hints=0, solved=false, t0=Date.now();
+let sel=null,marks={},failed=new Set(),hints=0,solved=false,t0=Date.now();
 
-// In-memory history (simulates localStorage)
-// key: "YYYY-MM-DD", value: {win, stars, time, fails, hints}
-const history = {};
+const STORAGE_KEY='deducto_history';
+function loadHistory(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}');}catch(e){return {};}}
+function saveHistory(h){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(h));}catch(e){}}
+const history=loadHistory();
 
-// Seed some demo data for calendar display
-(()=>{
-  const now=new Date();
-  for(let i=6;i>=1;i--){
-    const d=new Date(now); d.setDate(d.getDate()-i);
-    const k=fmtKey(d);
-    const win=Math.random()>0.25;
-    const f=win?Math.floor(Math.random()*2):Math.floor(Math.random()*3)+1;
-    const h=Math.floor(Math.random()*2);
-    history[k]={win,stars:win?(f===0&&h===0?'★★★':f===0||h===0?'★★☆':'★☆☆'):'☆☆☆',fails:f,hintsu:h,time:'2m 14s'};
-  }
-})();
-
-let calViewYear=today.getFullYear(), calViewMonth=today.getMonth();
-
+let calViewYear=today.getFullYear(),calViewMonth=today.getMonth();
 function fmtKey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
 const todayKey=fmtKey(today);
 
@@ -331,28 +405,86 @@ function goTo(id){
   if(id==='sGame') initGame();
 }
 
+function splashOut(){
+  const s=document.getElementById('sSplash');
+  s.style.transition='opacity 0.5s ease';
+  s.style.opacity='0';
+  setTimeout(()=>goTo('sMenu'),500);
+}
+
+// ── OVERLAY ──
+function showOverlay(html, cardClass){
+  const ov=document.getElementById('overlay');
+  const card=document.getElementById('overlayCard');
+  card.className='overlay-card '+(cardClass||'');
+  document.getElementById('overlayContent').innerHTML=html;
+  ov.classList.add('show');
+}
+
+function closeOverlay(){
+  const ov=document.getElementById('overlay');
+  ov.classList.remove('show');
+  if(solved) renderDecl();
+}
+
 // ── MENU ──
 function refreshMenu(){
   document.getElementById('menuDate').textContent=dayNames[dow]+' · '+today.toLocaleDateString('es-ES',{day:'numeric',month:'long'});
+  document.getElementById('menuHeroTitle').textContent=P.crime;
+  document.getElementById('menuHeroSetting').textContent=P.setting;
+  const diff=document.getElementById('menuHeroDiff');
+  diff.textContent=P.diff; diff.className='diff-pill menu-hero-diff '+P.dc;
   const played=Object.keys(history).length;
   const wins=Object.values(history).filter(x=>x.win).length;
-  document.getElementById('menuHistDesc').textContent=played>0?`${played} partidas · ${wins} resueltas`:'Aún no has jugado';
+  document.getElementById('menuHistTitle').textContent=`${played} partida${played!==1?'s':''}`;
+  document.getElementById('menuHistDesc').textContent=played>0?`${wins} resueltas`:'Aún no has jugado';
   const todayDone=history[todayKey];
-  document.getElementById('menuDailyDesc').textContent=todayDone?(todayDone.win?`Resuelto hoy · ${todayDone.stars}`:'Intentado hoy — ¡inténtalo mañana!'):'Nuevo caso disponible';
+  const btn=document.getElementById('menuHeroBtn');
+  if(todayDone){
+    btn.className='menu-hero-btn menu-hero-btn-done';
+    btn.textContent=todayDone.win?`Resuelto · ${todayDone.stars}`:'Ver resultado';
+  } else {
+    btn.className='menu-hero-btn';
+    btn.textContent='Investigar →';
+  }
   const streak=calcStreak();
-  document.getElementById('streakTitle').textContent=`Racha actual: ${streak} día${streak!==1?'s':''}`;
-  document.getElementById('streakSub').textContent=streak>0?`¡Llevas ${streak} días seguidos!`:'Resuelve el caso de hoy para comenzar';
+  const dotsEl=document.getElementById('streakDots');
+  dotsEl.innerHTML='';
+  for(let i=6;i>=0;i--){
+    const d=new Date(today); d.setDate(d.getDate()-i);
+    const k=fmtKey(d); const rec=history[k]; const isToday=i===0;
+    const dot=document.createElement('div');
+    if(isToday) dot.className='streak-dot '+(rec?(rec.win?'today-win':'lose'):'today-empty');
+    else dot.className='streak-dot '+(rec?(rec.win?'win':'lose'):'empty');
+    dotsEl.appendChild(dot);
+  }
+  const bar=document.getElementById('streakBar');
+  bar.className='menu-streak-bar '+(streak>=7?'s2':streak>=3?'s1':'s0');
+  document.getElementById('streakCount').textContent=streak+(streak>=7?' 🔥':streak>=3?' ⚡':'');
+  const best=calcBestStreak();
+  let sub='';
+  if(streak===0) sub='Resuelve el caso de hoy para empezar';
+  else if(streak<best) sub=`A ${best-streak} día${best-streak!==1?'s':''} de tu mejor racha (${best})`;
+  else if(streak===best&&streak>0) sub='¡Igualando tu mejor racha!';
+  if(streak>=7) sub='🏆 ¡Racha épica!';
+  document.getElementById('streakSub').textContent=sub;
 }
 
 function calcStreak(){
-  let streak=0, d=new Date(today);
-  while(true){
-    const k=fmtKey(d);
-    if(history[k]&&history[k].win) streak++;
-    else break;
-    d.setDate(d.getDate()-1);
-  }
+  let streak=0,d=new Date(today);
+  while(true){const k=fmtKey(d);if(history[k]&&history[k].win)streak++;else break;d.setDate(d.getDate()-1);}
   return streak;
+}
+
+function calcBestStreak(){
+  const keys=Object.keys(history).filter(k=>history[k].win).sort();
+  let best=0,cur=0,prev=null;
+  keys.forEach(k=>{
+    const d=new Date(k);
+    if(prev){const diff=(d-prev)/(1000*60*60*24);cur=diff===1?cur+1:1;}else cur=1;
+    if(cur>best)best=cur; prev=d;
+  });
+  return best;
 }
 
 // ── HISTORY ──
@@ -369,25 +501,19 @@ function refreshHistory(){
 function renderCalendar(){
   const mn=monthNames[calViewMonth];
   document.getElementById('calMonth').textContent=`${mn} ${calViewYear}`;
-  const grid=document.getElementById('calGrid');
-  grid.innerHTML='';
-  ['L','M','X','J','V','S','D'].forEach(d=>{
-    const el=document.createElement('div');el.className='cal-dow';el.textContent=d;grid.appendChild(el);
-  });
+  const grid=document.getElementById('calGrid'); grid.innerHTML='';
+  ['L','M','X','J','V','S','D'].forEach(d=>{const el=document.createElement('div');el.className='cal-dow';el.textContent=d;grid.appendChild(el);});
   const first=new Date(calViewYear,calViewMonth,1);
   let startDow=first.getDay()-1; if(startDow<0)startDow=6;
   const daysInMonth=new Date(calViewYear,calViewMonth+1,0).getDate();
   for(let i=0;i<startDow;i++){const e=document.createElement('div');e.className='cal-day empty';grid.appendChild(e);}
   for(let d=1;d<=daysInMonth;d++){
     const k=`${calViewYear}-${String(calViewMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const isToday=(k===todayKey);
-    const rec=history[k];
+    const isToday=(k===todayKey); const rec=history[k];
     const el=document.createElement('div');
-    let cls='cal-day';
-    if(isToday)cls+=' today';
-    if(rec){cls+=' played';cls+=rec.win?' win':' lose';}
+    let cls='cal-day'; if(isToday)cls+=' today'; if(rec){cls+=' played';cls+=rec.win?' win':' lose';}
     el.className=cls;
-    el.innerHTML=`<div class="cal-day-num">${d}</div>${rec?`<div class="cal-day-stars">${rec.win?rec.stars.replace(/★/g,'★').replace(/☆/g,''):'✕'}</div>`:''}`;
+    el.innerHTML=`<div class="cal-day-num">${d}</div>${rec?`<div class="cal-day-stars">${rec.win?rec.stars.replace(/☆/g,''):'✕'}</div>`:''}`;
     grid.appendChild(el);
   }
 }
@@ -398,18 +524,18 @@ function calNext(){calViewMonth++;if(calViewMonth>11){calViewMonth=0;calViewYear
 // ── GAME ──
 function initGame(){
   document.getElementById('dateLabel').textContent=dayNames[dow]+' · '+today.toLocaleDateString('es-ES',{day:'numeric',month:'long'});
-  const dp=document.getElementById('diffLabel');dp.textContent=P.diff;dp.className='diff-pill '+P.dc;
+  const dp=document.getElementById('diffLabel'); dp.textContent=P.diff; dp.className='diff-pill '+P.dc;
   document.getElementById('caseTitle').textContent=P.crime;
   document.getElementById('caseDesc').textContent=P.setting;
   const streak=calcStreak();
   document.getElementById('streakBadge').textContent=`◆ ${streak} día${streak!==1?'s':''}`;
-  renderBubbles();renderDecl();updateBtns();
+  renderBubbles(); renderDecl(); renderHints(); updateBtns();
 }
 
 function ini(n){return n.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();}
 
 function renderBubbles(){
-  const row=document.getElementById('suspRow');row.innerHTML='';
+  const row=document.getElementById('suspRow'); row.innerHTML='';
   P.suspects.forEach((s,i)=>{
     const av=AV[i%AV.length],isSel=sel===s.name,mark=marks[s.name],isFail=failed.has(s.name);
     let cls='avatar';
@@ -419,11 +545,21 @@ function renderBubbles(){
     if(isFail)dot=`<div class="mark-dot" style="background:#c0392b;">✕</div>`;
     else if(mark==='inno')dot=`<div class="mark-dot" style="background:#27500A;">✓</div>`;
     else if(mark==='susp')dot=`<div class="mark-dot" style="background:#b8860b;">?</div>`;
-    const bub=document.createElement('div');bub.className='sbubble';
+    const bub=document.createElement('div'); bub.className='sbubble';
     bub.innerHTML=`<div class="${cls}" style="background:${av.bg};color:${av.fg};">${ini(s.name)}${dot}</div><div class="sname">${s.name.split(' ')[0]}</div>`;
     bub.onclick=()=>selectS(s.name);
     row.appendChild(bub);
   });
+}
+
+function renderHints(){
+  const area=document.getElementById('hintsArea'); area.innerHTML='';
+  for(let h=0;h<hints;h++){
+    const box=document.createElement('div'); box.className='hint-box anim-slideup';
+    box.style.animationDelay=`${h*0.05}s`;
+    box.innerHTML=`<div class="hint-n">Pista ${h+1}</div>${P.hints[h]}`;
+    area.appendChild(box);
+  }
 }
 
 function renderDecl(){
@@ -432,20 +568,12 @@ function renderDecl(){
   const s=P.suspects.find(x=>x.name===sel),i=P.suspects.indexOf(s),av=AV[i%AV.length];
   const mark=marks[s.name],isFail=failed.has(s.name);
   let badge='';
-  if(isFail)badge=`<span class="badge badge-fail">Acusación fallida</span>`;
-  else if(mark==='inno')badge=`<span class="badge badge-inno">Inocente</span>`;
-  else if(mark==='susp')badge=`<span class="badge badge-susp">Sospechoso</span>`;
-  let html=`<div class="decl-header"><div class="decl-avatar" style="background:${av.bg};color:${av.fg};">${ini(s.name)}</div><div><div class="decl-name">${s.name}</div><div class="decl-role">${s.role}</div>${badge}</div></div>`;
-  html+=`<div class="speech">${s.clue}</div>`;
-  if(isFail&&P.wrongReasons&&P.wrongReasons[s.name])html+=`<div class="why-box"><div class="why-title">Por qué no es culpable</div>${P.wrongReasons[s.name]}</div>`;
-  for(let h=0;h<hints;h++)html+=`<div class="hint-box"><div class="hint-n">Pista ${h+1}</div>${P.hints[h]}</div>`;
-  if(solved){
-    const win=sel===P.culprit,e=Math.round((Date.now()-t0)/1000),ts=Math.floor(e/60)>0?`${Math.floor(e/60)}m ${e%60}s`:`${e%60}s`;
-    const stars=failed.size===0&&hints===0?'★★★':failed.size===0||hints===0?'★★☆':'★☆☆';
-    if(win){html+=`<div class="result-win"><div class="result-title" style="color:#1a5c1a;">Caso cerrado</div><div class="result-body" style="color:#27500A;">${P.explanation}</div><div class="stats-row"><div class="stat"><div class="stat-n" style="color:#276327;">${ts}</div><div class="stat-l" style="color:#276327;">tiempo</div></div><div class="stat"><div class="stat-n" style="color:#276327;">${failed.size}</div><div class="stat-l" style="color:#276327;">fallos</div></div><div class="stat"><div class="stat-n" style="color:#276327;">${hints}</div><div class="stat-l" style="color:#276327;">pistas</div></div></div><div style="font-size:20px;letter-spacing:4px;text-align:center;margin-bottom:8px;">${stars}</div><button class="share-btn" onclick="doShare(true,'${ts}','${stars}')">Compartir resultado</button></div>`;}
-    else{html+=`<div class="result-lose"><div class="result-title" style="color:#791F1F;">Incorrecto</div><div class="result-body" style="color:#791F1F;">El culpable era <strong>${P.culprit}</strong>. ${P.explanation}</div><button class="share-btn" onclick="doShare(false,'${ts}','☆☆☆')">Compartir resultado</button></div>`;}
-  }
-  ds.innerHTML=html;ds.scrollTop=0;
+  if(isFail)badge=`<span class="badge badge-fail anim-pop">Acusación fallida</span>`;
+  else if(mark==='inno')badge=`<span class="badge badge-inno anim-pop">Inocente</span>`;
+  else if(mark==='susp')badge=`<span class="badge badge-susp anim-pop">Sospechoso</span>`;
+  let html=`<div class="decl-header anim-slideup"><div class="decl-avatar" style="background:${av.bg};color:${av.fg};">${ini(s.name)}</div><div style="flex:1;"><div class="decl-name">${s.name}</div><div class="decl-role">${s.role}</div>${s.context?`<div class="decl-context">${s.context}</div>`:''} ${badge}</div></div>`;
+  html+=`<div class="speech anim-slideup" style="animation-delay:0.05s;">${s.clue}</div>`;
+  ds.innerHTML=html; ds.scrollTop=0;
 }
 
 function updateBtns(){
@@ -467,31 +595,81 @@ function doAccuse(){
     const e=Math.round((Date.now()-t0)/1000),ts=Math.floor(e/60)>0?`${Math.floor(e/60)}m ${e%60}s`:`${e%60}s`;
     const stars=failed.size===0&&hints===0?'★★★':failed.size===0||hints===0?'★★☆':'★☆☆';
     history[todayKey]={win:true,stars,time:ts,fails:failed.size,hintsu:hints};
+    saveHistory(history);
+    // ripple
+    document.querySelectorAll('.sbubble').forEach(b=>{
+      if(b.querySelector('.sname').textContent===sel.split(' ')[0]){
+        const av=b.querySelector('.avatar');
+        const ring=document.createElement('div'); ring.className='ripple-ring'; av.appendChild(ring);
+        setTimeout(()=>ring.remove(),700);
+      }
+    });
+    renderBubbles(); updateBtns();
+    // win overlay
+    const starsHtml=stars.split('').map((s,i)=>`<span style="display:inline-block;animation:starPop 0.3s cubic-bezier(.34,1.56,.64,1) ${0.15+i*0.13}s both;">${s}</span>`).join('');
+    setTimeout(()=>{
+      showOverlay(`
+        <div class="overlay-title overlay-title-win">Caso cerrado</div>
+        <div class="overlay-body overlay-body-win">${P.explanation}</div>
+        <div class="overlay-stats">
+          <div class="overlay-stat"><div class="overlay-stat-n">${ts}</div><div class="overlay-stat-l">tiempo</div></div>
+          <div class="overlay-stat"><div class="overlay-stat-n">${failed.size}</div><div class="overlay-stat-l">fallos</div></div>
+          <div class="overlay-stat"><div class="overlay-stat-n">${hints}</div><div class="overlay-stat-l">pistas</div></div>
+        </div>
+        <div class="overlay-stars">${starsHtml}</div>
+        <div class="overlay-btns">
+          <button class="overlay-btn-share" onclick="doShare(true,'${ts}','${stars}')">Compartir resultado</button>
+          <button class="overlay-btn-menu" onclick="closeOverlay();goTo('sMenu')">Volver al menú</button>
+        </div>
+      `,'overlay-card-win');
+    },400);
   } else {
     failed.add(sel);
+    // shake
+    document.querySelectorAll('.sbubble').forEach(b=>{
+      if(b.querySelector('.sname').textContent===sel.split(' ')[0]){
+        const av=b.querySelector('.avatar'); av.classList.add('anim-shake');
+        setTimeout(()=>av.classList.remove('anim-shake'),400);
+      }
+    });
+    const why=P.wrongReasons&&P.wrongReasons[sel]?`<div class="overlay-why"><div class="overlay-why-title">Por qué no es culpable</div>${P.wrongReasons[sel]}</div>`:'';
+    setTimeout(()=>{
+      showOverlay(`
+        <div class="overlay-title overlay-title-lose">Acusación incorrecta</div>
+        <div class="overlay-body overlay-body-lose">${sel} no es el culpable.</div>
+        ${why}
+        <div class="overlay-btns">
+          <button class="overlay-btn-close" onclick="closeOverlay()">Seguir investigando</button>
+        </div>
+      `,'overlay-card-lose');
+    },350);
     if(failed.size>=P.suspects.length-1){
       solved=true;
       history[todayKey]={win:false,stars:'☆☆☆',time:'—',fails:failed.size,hintsu:hints};
+      saveHistory(history);
     }
+    renderBubbles(); renderDecl(); updateBtns();
   }
-  renderBubbles();renderDecl();updateBtns();
 }
 
-function doHint(){if(hints>=Math.min(3,P.hints.length)||solved)return;hints++;renderDecl();updateBtns();}
+function doHint(){
+  if(hints>=Math.min(3,P.hints.length)||solved)return;
+  hints++;
+  renderHints();
+  updateBtns();
+}
 
 function doShare(win,ts,stars){
   const txt=`Deducto ${dayNames[dow]} ${today.toLocaleDateString('es-ES',{day:'2-digit',month:'2-digit'})}\n${win?`Resuelto ${stars}`:'Sin resolver ☆☆☆'}\n⏱ ${ts} · ✗ ${failed.size} fallos · 💡 ${hints} pistas\ndeducto.app`;
   if(navigator.share)navigator.share({text:txt});
-  else navigator.clipboard.writeText(txt).then(()=>{const b=document.querySelector('.share-btn');if(b){b.textContent='¡Copiado!';setTimeout(()=>b.textContent='Compartir resultado',1500);}});
+  else navigator.clipboard.writeText(txt).then(()=>{const b=document.querySelector('.overlay-btn-share');if(b){b.textContent='¡Copiado!';setTimeout(()=>b.textContent='Compartir resultado',1500);}});
 }
 
-// ── CLOCK ──
 const cl=document.getElementById('clk');
 function tick(){const n=new Date();cl.textContent=n.getHours()+':'+(n.getMinutes()<10?'0':'')+n.getMinutes();}
 tick();setInterval(tick,15000);
-
-// ── INIT ──
 refreshMenu();
 </script>
+
 </body>
 </html>
